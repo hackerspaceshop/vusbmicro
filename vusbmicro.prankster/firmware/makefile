@@ -236,6 +236,9 @@ writeflash: hex
 	 -V -U flash:w:$(HEXROMTRG)
 
 install: writeflash
+	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMERID)   \
+         -p $(PROGRAMMER_MCU) -V \
+	 -U lfuse:w:0xe1:m -U hfuse:w:0x5d:m -U efuse:w:0xff:m 
 
 $(DUMPTRG): $(TRG) 
 	$(OBJDUMP) -S  $< > $@
