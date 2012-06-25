@@ -5,7 +5,7 @@
  * Tabsize: 4
  * Copyright: (c) 2005 by OBJECTIVE DEVELOPMENT Software GmbH
  * License: GNU GPL v2 (see License.txt), GNU GPL v3 or proprietary (CommercialLicense.txt)
- * This Revision: $Id: usbdrv.h 769 2009-08-22 11:49:05Z cs $
+ * This Revision: $Id$
  */
 
 #ifndef __usbdrv_h_included__
@@ -105,9 +105,9 @@ interrupt routine.
 Interrupt latency:
 The application must ensure that the USB interrupt is not disabled for more
 than 25 cycles (this is for 12 MHz, faster clocks allow longer latency).
-This implies that all interrupt routines must either be declared as "INTERRUPT"
-instead of "SIGNAL" (see "avr/signal.h") or that they are written in assembler
-with "sei" as the first instruction.
+This implies that all interrupt routines must either have the "ISR_NOBLOCK"
+attribute set (see "avr/interrupt.h") or be written in assembler with "sei"
+as the first instruction.
 
 Maximum interrupt duration / CPU cycle consumption:
 The driver handles all USB communication during the interrupt service
@@ -122,7 +122,7 @@ USB messages, even if they address another (low-speed) device on the same bus.
 /* --------------------------- Module Interface ---------------------------- */
 /* ------------------------------------------------------------------------- */
 
-#define USBDRV_VERSION  20090822
+#define USBDRV_VERSION  20120109
 /* This define uniquely identifies a driver version. It is a decimal number
  * constructed from the driver's release date in the form YYYYMMDD. If the
  * driver's behavior or interface changes, you can use this constant to
@@ -452,43 +452,43 @@ extern
 #if !(USB_CFG_DESCR_PROPS_DEVICE & USB_PROP_IS_RAM)
 PROGMEM
 #endif
-char usbDescriptorDevice[];
+const char usbDescriptorDevice[];
 
 extern
 #if !(USB_CFG_DESCR_PROPS_CONFIGURATION & USB_PROP_IS_RAM)
 PROGMEM
 #endif
-char usbDescriptorConfiguration[];
+const char usbDescriptorConfiguration[];
 
 extern
 #if !(USB_CFG_DESCR_PROPS_HID_REPORT & USB_PROP_IS_RAM)
 PROGMEM
 #endif
-char usbDescriptorHidReport[];
+const char usbDescriptorHidReport[];
 
 extern
 #if !(USB_CFG_DESCR_PROPS_STRING_0 & USB_PROP_IS_RAM)
 PROGMEM
 #endif
-char usbDescriptorString0[];
+const char usbDescriptorString0[];
 
 extern
 #if !(USB_CFG_DESCR_PROPS_STRING_VENDOR & USB_PROP_IS_RAM)
 PROGMEM
 #endif
-int usbDescriptorStringVendor[];
+const int usbDescriptorStringVendor[];
 
 extern
 #if !(USB_CFG_DESCR_PROPS_STRING_PRODUCT & USB_PROP_IS_RAM)
 PROGMEM
 #endif
-int usbDescriptorStringDevice[];
+const int usbDescriptorStringDevice[];
 
 extern
 #if !(USB_CFG_DESCR_PROPS_STRING_SERIAL_NUMBER & USB_PROP_IS_RAM)
 PROGMEM
 #endif
-int usbDescriptorStringSerialNumber[];
+const int usbDescriptorStringSerialNumber[];
 
 #endif /* __ASSEMBLER__ */
 
@@ -719,6 +719,7 @@ typedef struct usbRequest{
 #define USBDESCR_HID_PHYS       0x23
 
 //#define USBATTR_BUSPOWER        0x80  // USB 1.1 does not define this value any more
+#define USBATTR_BUSPOWER        0
 #define USBATTR_SELFPOWER       0x40
 #define USBATTR_REMOTEWAKE      0x20
 
