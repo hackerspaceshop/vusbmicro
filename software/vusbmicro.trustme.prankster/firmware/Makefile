@@ -9,7 +9,7 @@ TARGET = trustme.elf
 CC = avr-gcc
 
 
-FUSE_L  = 0xE1
+FUSE_L  = 0xC1
 FUSE_H  = 0xDD
 AVRDUDE = avrdude -c usbtiny -p $(MCU) # edit this line for your programmer
 
@@ -93,7 +93,7 @@ clean:
 fuse: 
 	sudo $(AVRDUDE)  -U hfuse:w:$(FUSE_H):m -U lfuse:w:$(FUSE_L):m
 
-flash: trustme.hex
+prog: trustme.hex
 	sudo $(AVRDUDE) -U flash:w:trustme.hex:i
 
 
