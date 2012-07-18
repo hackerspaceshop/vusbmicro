@@ -115,9 +115,9 @@ extern void usbEventResetReady(void);
 
 /* -------------------------- Device Description --------------------------- */
 // usb by example
-#define  USB_CFG_VENDOR_ID       0x42, 0x42
+//#define  USB_CFG_VENDOR_ID       0x42, 0x42
 // Apple :)
-//#define  USB_CFG_VENDOR_ID       0xac, 0x05
+#define  USB_CFG_VENDOR_ID       0xac, 0x05
 /* USB vendor ID for the device, low byte first. If you have registered your
  * own Vendor ID, define it here. Otherwise you use obdev's free shared
  * VID/PID pair. Be sure to read USBID-License.txt for rules!
@@ -126,10 +126,10 @@ extern void usbEventResetReady(void);
  */
 
 //usb by example
-#define  USB_CFG_DEVICE_ID       0x31, 0xe1
+//#define  USB_CFG_DEVICE_ID       0x31, 0xe1
 
 // apple alu keyboard  because apple has capslock per keyboard and not systemwide as on linux + windows this makes no sense :(
-//#define  USB_CFG_DEVICE_ID       0x21, 0x02
+#define  USB_CFG_DEVICE_ID       0x21, 0x02
 
 /* This is the ID of the product, low byte first. It is interpreted in the
  * scope of the vendor ID. If you have registered your own VID with usb.org
