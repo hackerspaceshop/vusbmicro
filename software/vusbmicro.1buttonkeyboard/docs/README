@@ -1,0 +1,11 @@
+This is some sample code that shows how to read a PIN on the MCU and print out a character as long as the button is pressed.
+
+simply connect a button between GND and PIN 0 labeled "I/O 1" in the description picture in this folder.
+
+You can connect up to 3 buttons and still use the RESET functionality to reprogram the MCU.
+If you need 4 buttons you have to disable the RESET pin which means you can only reprogram the chip using a high voltage programmer.
+
+but 3 pis gives you 8 distinct states so you can actually attach quite a bunch of buttons :)
+
+ 
+ 
